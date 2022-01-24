@@ -10,9 +10,11 @@ public class Board {
 	}
 	
 	public void takePins(int x) {
+		
 		noPins = noPins - x;
 	}
-	
+		
+
 	public int getNoPins() {
 		return noPins;
 	}
