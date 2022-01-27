@@ -11,15 +11,17 @@ public class TakePinsGame {
 		int t = 10;
 		bord.setUp(t);
 
-		System.out.println("ange ditt namn");
-		Scanner sc = new Scanner(System.in);
-		String i = sc.nextLine();
+
+
+		UserInterface.printMessage("välkommen till Take Pins Game");
+	
+		String i = UserInterface.namnVal("Ange ditt namn");
 
 		Player human = new HumanPlayer(i);
 		ComputerPlayer computer = new ComputerPlayer("Robotvän");
 
-		System.out.println(human.userId + " VS " + computer.userId);
-		System.out.println("Det finns " + t + " stickor");
+		UserInterface.printMessage(human.userId + " VS " + computer.userId);
+		UserInterface.printMessage("Det finns " + t + " stickor");
 		Boolean game = true;
 		Boolean win = true;
 
@@ -27,22 +29,28 @@ public class TakePinsGame {
 			
 
 			if (bord.noPins > 0) {
-				System.out.println("ta 1 eller 2 stickor");
-				int x = sc.nextInt();
-				while (x > 2 || x < 0) {
-					System.out.println("du får bara ta 1 eller 2 pins");
-					x = sc.nextInt();
+				int s = UserInterface.askForInt("välj ett nummer 1 eller 2");
+				if (s == -2) {
+					System.exit(0);
+				}
+				while (s < -2 || s > 2 || s == 0) {
+					UserInterface.printMessage("du får bara välje 1 eller 2 stickor");
+					s = UserInterface.askForInt("välj ett nummer 1 eller 2");
 				}
 
-				human.takePins(bord, x);
-				System.out.println("Det finns " + bord.noPins + " Stickor kvar");
-				win = true;
+				while (s == -1) {
+					UserInterface.printMessage("du kan bara välja 1 eller 2");
+					s = UserInterface.askForInt("Ange ett nummer 1 eller 2");
+				}
 
+				human.takePins(bord, s);
+				UserInterface.printMessage("Det finns " + bord.noPins + " Stickor kvar");
+				win = true;
 				int b = computer.cs(1, 2);
 				if (bord.noPins >= 2) {
 					computer.takePins(bord, b);
-					System.out.println(computer.userId + " tog " + b + " stickor");
-					System.out.println("Det finns " + bord.noPins + " Stickor kvar ");
+					UserInterface.printMessage(computer.userId + " tog " + b + " stickor");
+					UserInterface.printMessage("Det finns " + bord.noPins + " Stickor kvar ");
 					win = false;
 				} else if (bord.noPins == 1) {
 					computer.takePins(bord, 1);
@@ -50,20 +58,26 @@ public class TakePinsGame {
 				} else {
 					computer.takePins(bord, 0);
 					win = true;
-				}
-			} else if (bord.noPins == 0) {
+				}}
+				 
+			else if (bord.noPins == 0) {
 				if (win == true) {
-					System.out.println("Vinnaren är " + human.userId);
+					UserInterface.printMessage("Vinnaren är " + human.userId);
 					game = false;
 				} else if (win == false) {
-					System.out.println("Vinnaren är " + computer.userId);
+					UserInterface.printMessage("Vinnaren är " + computer.userId);
 					game = false;
 				}
 			}
 		}
-
-
-
+				
 	}
-
+			
+		
+			
+			
+			
 }
+
+
+				
