@@ -6,7 +6,7 @@ import java.util.Random;
 public class TakePinsGame {
 
 	public static void main(String[] args) {
-
+		
 		Board bord = new Board();
 		int t = 10;
 		bord.setUp(t);
@@ -19,8 +19,9 @@ public class TakePinsGame {
 
 		Player human = new HumanPlayer(i);
 		ComputerPlayer computer = new ComputerPlayer("Robotvän");
+		Comp computer2 = new Comp("RobotKING");
 
-		UserInterface.printMessage(human.userId + " VS " + computer.userId);
+		UserInterface.printMessage(human.userId + " VS " + computer2.userId);
 		UserInterface.printMessage("Det finns " + t + " stickor");
 		Boolean game = true;
 		Boolean win = true;
@@ -46,10 +47,10 @@ public class TakePinsGame {
 				human.takePins(bord, s);
 				UserInterface.printMessage("Det finns " + bord.noPins + " Stickor kvar");
 				win = true;
-				int b = computer.cs(1, 2);
+				int b = computer2.vinn(bord);
 				if (bord.noPins >= 2) {
 					computer.takePins(bord, b);
-					UserInterface.printMessage(computer.userId + " tog " + b + " stickor");
+					UserInterface.printMessage(computer2.userId + " tog " + b + " stickor");
 					UserInterface.printMessage("Det finns " + bord.noPins + " Stickor kvar ");
 					win = false;
 				} else if (bord.noPins == 1) {
@@ -65,7 +66,7 @@ public class TakePinsGame {
 					UserInterface.printMessage("Vinnaren är " + human.userId);
 					game = false;
 				} else if (win == false) {
-					UserInterface.printMessage("Vinnaren är " + computer.userId);
+					UserInterface.printMessage("Vinnaren är " + computer2.userId);
 					game = false;
 				}
 			}
